@@ -1,127 +1,108 @@
-# 🧪 Mi Laboratorio Digital — Framework HER
+# 🧪 Vibecoding — Framework HER
 **Digital Fluency · DaVinci · Collective Academy**
 
 ---
 
 ## Lo único que necesitas hacer
 
-1. **Toma un screenshot de tu Zona 5 en Miro** — el frame naranja con tu HER completo
+1. **Toma dos screenshots:**
+   - Tu **Zona 5 de Miro** con tu HER ya completado
+   - La **imagen de referencia de diseño** que te compartió León
+     (el formulario oscuro con las tres columnas H · E · R)
 2. **Abre [bolt.new](https://bolt.new)**
-3. **Pega el prompt de abajo** y **adjunta tu screenshot** en el mismo mensaje
-4. Espera 1-2 minutos, revisa en **Preview** y haz **Deploy**
+3. **Pega el prompt de abajo**, adjunta **las dos imágenes** y envía
+4. Revisa en **Preview**, haz **Deploy** y comparte tu URL
 
 ---
 
 ## Prompt
 
 ```
-I'm going to attach a screenshot of my HER framework from a program
-called Digital Fluency. Read the image carefully and extract every
-piece of text visible in it.
+I'm attaching two images:
+1. A DESIGN REFERENCE — the exact layout and visual style to replicate
+2. MY MIRO DATA — my completed HER framework with my actual content
 
-Then build me a single-page website that presents my HER framework.
+Read both images carefully.
+Extract all my personal content from image 2.
+Replicate the visual design from image 1 exactly.
+Build it as a single index.html file.
 
---- READING THE IMAGE ---
+--- DESIGN (replicate from reference image) ---
 
-Extract from the screenshot:
-- My name (look in the frame header or participant name field)
-- H: my impact hypothesis ("la apuesta que estoy haciendo")
-- H: the organizational problem it solves
-- E: what I'll do and learn at 30 days
-- E: what I'll do and learn at 60 days
-- E: what I'll do and learn at 90 days
-- R: what I deliver to my organization at day 90
-- R: how I know it worked
-- My first action on Monday (the last field at the bottom)
+Dark background (#0A0A0A). Off-white text (#F5F2ED).
+Three-column layout for H · E · R cards (stack on mobile).
 
-If any field is unclear in the image, use "[completar]" as placeholder.
+H card — magenta (#E91E8C) top bar, 3px:
+  - Label: "HIPÓTESIS DE IMPACTO" in magenta caps
+  - Big letter "H" in magenta (large, faint ghost letter behind)
+  - Italic question: "¿Qué problema organizacional estás apostando a resolver?"
+  - Field label: "La apuesta que estoy haciendo:"
+  - Dark input box with my content
+  - Field label: "El problema que resuelve (no la solución):"
+  - Dark input box with my content
+  - Footer: "Conecta con: Territorio (S1) · Decisión (S4)"
 
---- BUILD THE SITE ---
+E card — green (#00C851) top bar, 3px:
+  - Label: "EXPERIMENTO ESTRUCTURADO" in green caps
+  - Big letter "E" in green
+  - Italic question: "¿Qué harás y qué aprenderás en 30-60-90 días?"
+  - Three rows, each with field label + dark input box:
+      "30 días — Haré... y aprenderé si..."
+      "60 días — Ajustaré... y aprenderé si..."
+      "90 días — Entregaré... y habré aprendido que..."
+  - Footer: "Conecta con: D.A.T.A. (S2) · Board (S3) · ARL/VIRA (S4)"
 
-One index.html file only. Vanilla HTML + CSS + JS. No npm, no frameworks.
+R card — purple (#7B2FBE) top bar, 3px:
+  - Label: "RETORNO DEMOSTRABLE" in purple caps
+  - Big letter "R" in purple
+  - Italic question: "¿Qué le entregas a tu organización al día 90?"
+  - Field label: "Lo que entrego al día 90:"
+  - Dark input box with my content
+  - Field label: "Cómo sé que funcionó:"
+  - Dark input box with my content
+  - Footer: "Conecta con: Score VIRA (S4) · Territorio (S1)"
 
-DESIGN:
-- Background: #0A0A0A | Text: #F5F2ED
-- H accent: #E91E8C (magenta) | E accent: #00C851 (green) | R accent: #7B2FBE (purple)
-- Fonts: Google Fonts — Syne 800 (headings) + DM Sans (body) via CSS @import
-- Dark executive feel. No white backgrounds. CSS variables in :root.
-- Mobile responsive. Subtle fadeUp animation on load.
+Below the three cards — two boxes side by side (full width):
+  Left box: label "LO QUE APRENDÍ DE MI BOARD EN ESTE PROCESO" + dark input
+  Right box: label "LA PARTE MÁS FRÁGIL DE MI PLAN — Y CÓMO LA FORTALEZCO" + dark input
 
-LAYOUT (single scrolling page):
+Bottom — full-width magenta bar (#E91E8C):
+  - ">" arrow icon on left
+  - Label: "MI PRIMERA ACCIÓN EL LUNES" in white caps
+  - White underline input field with my action text
 
-1. HEADER
-   - My name (large, Syne 800)
-   - Small badge: "Framework HER · Mi Laboratorio Digital"
-   - Tagline: "Mi apuesta. Mi experimento. Mi retorno."
+--- FUNCTIONALITY ---
 
-2. HER — 3 cards side by side (stack on mobile)
+All input boxes: contenteditable="true" with data-key attribute.
+On focus: subtle border glow in the card's accent color.
+Debounce 700ms save to localStorage. Restore on page load.
+Show "· guardado" briefly after save.
 
-   H card (magenta top bar):
-   - Big letter "H" in magenta
-   - Label: "Hipótesis de Impacto"
-   - Question: "¿Qué problema organizacional estás apostando a resolver?"
-   - My content: apuesta + problema (editable fields)
-   - Footer note: "Conecta con: Territorio (S1) · Decisión (S4)"
+Three floating icon buttons bottom-right:
+  - Edit/View toggle (pencil): contenteditable on/off
+  - Export PDF (download): window.print()
+  - Copy link (chain): navigator.clipboard + toast "¡Link copiado!"
 
-   E card (green top bar):
-   - Big letter "E" in green
-   - Label: "Experimento Estructurado"
-   - Question: "¿Qué harás y qué aprenderás en 30-60-90 días?"
-   - 3 rows: badge (30d / 60d / 90d) + editable text each
-   - Footer note: "Conecta con: D.A.T.A. (S2) · Board (S3) · ARL/VIRA (S4)"
+Print CSS: white background, black text, hide buttons.
 
-   R card (purple top bar):
-   - Big letter "R" in purple
-   - Label: "Retorno Demostrable"
-   - Question: "¿Qué le entregas a tu organización al día 90?"
-   - My content: entrego + métrica (editable fields)
-   - Footer note: "Conecta con: Score VIRA (S4) · Territorio (S1)"
+--- CONSTRAINTS ---
 
-3. MONDAY ACTION — full-width magenta bar
-   - Label: "⚡ Mi primera acción el lunes"
-   - My action text (large, white, bold, editable)
-
-FOOTER: "Digital Fluency · DaVinci · Collective Academy · León Ruiz · 2026"
-
-FLOATING CONTROLS (bottom-right, 3 icon buttons):
-- Edit/View toggle: contenteditable on/off
-- Export PDF: window.print()
-- Copy link: navigator.clipboard + toast "¡Link copiado!"
-
-EDITABLE FIELDS:
-- All text areas: contenteditable="true" with data-key
-- On focus: border in card's accent color
-- :empty::before shows placeholder in gray italic
-- Single-line fields: prevent Enter key, blur instead
-- View mode: contenteditable=false, borders transparent
-
-PERSISTENCE:
-- Debounce 700ms save to localStorage on input
-- Restore from localStorage on load
-- Show "· guardado" briefly after save
-
-PRINT CSS:
-- White background, black text
-- Hide floating controls
-- No page breaks inside cards
-
-CONSTRAINTS:
-- ONE file: index.html
-- Google Fonts via CSS @import only
-- No external JS libraries
-- Under 400 lines total
+One index.html file. All CSS in <style>. All JS in <script>.
+Google Fonts: DM Sans via CSS @import only.
+No frameworks. No npm. No external JS.
+CSS variables in :root. No inline styles.
 ```
 
 ---
 
-## Si algo no quedó bien — qué escribirle a Bolt
+## Si algo no quedó bien
 
-| Problema | Qué escribir en Bolt |
-|----------|---------------------|
-| No leyó bien un campo | `You missed [campo]. It says: "[texto exacto]". Please update it.` |
-| Los datos no guardan | `localStorage isn't working. Fix save/load for all data-key fields.` |
-| En móvil se ve mal | `Fix mobile: HER cards should stack vertically under 768px.` |
-| PDF con fondo negro | `Fix print CSS: white bg, black text, hide controls, no breaks inside cards.` |
+| Problema | Qué escribirle a Bolt |
+|----------|----------------------|
+| No leyó bien un campo | `You missed [campo]. It says: "[texto]". Please update it.` |
+| Los datos no guardan | `Fix localStorage: save/load all data-key fields on input and page load.` |
+| En móvil se ve mal | `Fix mobile: stack all cards vertically under 768px.` |
+| PDF con fondo negro | `Fix print CSS: white background, black text, hide floating buttons.` |
 
 ---
 
